@@ -15,9 +15,5 @@ SPIDER_MODULES = ['sjgtw_links.spiders']
 NEWSPIDER_MODULE = 'sjgtw_links.spiders'
 
 
-MONGODB_SERVER = 'guaxiaoda.cn'
-MONGODB_PORT = 27017
-MONGODB_DB = 'housedb'
-MONGODB_COLLECTION = 'linkinfo'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'sjgtw_links (+http://www.yourdomain.com)'
