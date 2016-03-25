@@ -15,5 +15,6 @@ class SjgtwLinksItem(scrapy.Item):
     url = scrapy.Field()
     from_url = scrapy.Field()
     clickId = scrapy.Field()
+    parentClickId = scrapy.Field()
     insert_time = scrapy.Field()
     pass

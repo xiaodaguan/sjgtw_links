@@ -38,14 +38,14 @@ class SjgtwLinksPipeline(object):
         # for data in item:
         # here we only check if the data is not null
         # but we could do any crazy validation we want
-        if not item['title']:
+        if not item['clickId']:
             valid = False
-            raise DropItem("Missing title %s" % item)
-        if item['title'] in self.titles_seen:  # crawled before
+            raise DropItem("Missing clickId %s" % item)
+        if item['clickId'] in self.titles_seen:  # crawled before
             valid = False
             raise DropItem("item %s already in mongodb." % item)
         if valid:
-            self.titles_seen.add(item['title'])
+            self.titles_seen.add(item['clickId'])
             self.collection.insert(dict(item))
             log.msg("Item wrote to MongoDB database %s/%s" %
                     (settings['MONGODB_DB'], settings['MONGODB_COLLECTION']),
