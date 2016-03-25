@@ -19,10 +19,10 @@ class linkSpider(scrapy.Spider):
 
     def __init__(self):
 
-        self.file = codecs.open('links.txt', 'a')  # append mode
-        self.file.write("level\tname\tclickId\turl\tfrom_url\n")
-        self.urls_seen = set()
-        self.urls_crawled = set()
+        # self.file = codecs.open('links.txt', 'a')  # append mode
+        # self.file.write("level\tname\tclickId\turl\tfrom_url\n")
+        # self.urls_seen = set()
+        # self.urls_crawled = set()
         for i in range(1, 7000):  # max: 6947
             self.start_urls.append("http://www.sjgtw.com/goodsClass/goodsClassIndex?clickId=%d" % i)
             # crawled = open("crawled.txt", 'r')

@@ -16,7 +16,7 @@ from scrapy.exceptions import DropItem
 class SjgtwLinksPipeline(object):
     def __init__(self):
 
-        self.titles_seen = set()
+        self.urls_seen = set()
 
         # connection = pymongo.MongoClient("mongodb://"+settings['MONGODB_SERVER']+":"+str(settings['MONGODB_PORT']))
         # db = connection[settings['MONGODB_DB']]
@@ -28,8 +28,8 @@ class SjgtwLinksPipeline(object):
         log.msg(">>>loading items crawled before...")
         items = self.collection.find()
         for item in items:
-            self.titles_seen.add(item['title'])
-        log.msg(">>>load %d titles from mongodb" % len(self.titles_seen))
+            self.urls_seen.add(item['url'])
+        log.msg(">>>load %d seen urls from mongodb" % len(self.urls_seen))
         # db = connection['housedb']
         # self.collection = db['houseinfo']
 
@@ -41,11 +41,11 @@ class SjgtwLinksPipeline(object):
         if not item['clickId']:
             valid = False
             raise DropItem("Missing clickId %s" % item)
-        if item['clickId'] in self.titles_seen:  # crawled before
+        if item['url'] in self.urls_seen:  # crawled before
             valid = False
             raise DropItem("item %s already in mongodb." % item)
         if valid:
-            self.titles_seen.add(item['clickId'])
+            self.urls_seen.add(item['url'])
             self.collection.insert(dict(item))
             log.msg("Item wrote to MongoDB database %s/%s" %
                     (settings['MONGODB_DB'], settings['MONGODB_COLLECTION']),
